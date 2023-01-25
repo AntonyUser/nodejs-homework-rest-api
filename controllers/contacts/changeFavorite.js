@@ -3,7 +3,11 @@ const createError = require("http-errors");
 
 const changeFavorite = async (req, res) => {
   const { contactId } = req.params;
+  if (!req.body) {
+    throw createError(400, `missing field favorite`);
+  }
   const { favorite } = req.body;
+
   // const { name, email, phone } = req.body;
   const result = await Contact.findByIdAndUpdate(
     contactId,
