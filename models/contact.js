@@ -19,6 +19,11 @@ const productSchema = Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -28,10 +33,11 @@ const joiSchema = Joi.object({
   email: Joi.string().required(),
   phone: Joi.string().required(),
   favorite: Joi.bool(),
+  owner: Joi.string(),
 });
 
 const favoriteJoiSchema = Joi.object({
-  favorite: Joi.bool(),
+  favorite: Joi.bool().required(),
 });
 
 const Contact = model("contact", productSchema);
